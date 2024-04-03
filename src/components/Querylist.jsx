@@ -24,7 +24,7 @@ function Querylist() {
     return (
 
         <>
-            <h1>{query[0].name}</h1>
+            <h1>{query.length > 0 && query[0].name}</h1>
 
             <table>
                 <tbody>
