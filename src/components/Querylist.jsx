@@ -8,12 +8,12 @@ function Querylist() {
     const [answersList, setAnswersList] = useState([]);
 
     const handleBlur = () => {
-        const isAnswerExists = answersList.some(item => item.questionId === answer.questionId);
+        const isAnswerExists = answersList.some(item => item.questionid === answer.questionid);
 
         if (isAnswerExists) {
             setAnswersList(prevAnswersList => 
                 prevAnswersList.map(item => {
-                    if (item.questionId === answer.questionId) {
+                    if (item.questionid === answer.questionid) {
                         return answer;
                     } else {
                         return item;
@@ -67,9 +67,9 @@ function Querylist() {
                 <tbody>
                     {query.map((queries) =>
                         queries.questions.map((question) =>
-                            <tr key={question.id}>
+                            <tr key={question.questionid}>
                                 <td>{question.questionText}</td>
-                                <td><input type="text" onBlur={handleBlur} onChange={e => setAnswer({...answer, questionId: question.id, answer: e.target.value})}/></td>
+                                <td><input type="text" onBlur={handleBlur} onChange={e => setAnswer({...answer, questionid: question.questionid, answerText: e.target.value})}/></td>
                             </tr>
                         )
                     )}
