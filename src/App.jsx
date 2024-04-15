@@ -4,17 +4,11 @@ import Querylist from './components/Querylist'
 
 function App() {
 
-
   return(
     <>
       <Querylist />
-    
     </>
   )
-
-
-
-
 }
 
 export default App
