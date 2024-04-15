@@ -41,6 +41,23 @@ function Querylist() {
             .catch(err => console.error(err))
     }
 
+
+    const saveAnswers = () =>{
+        fetch('http://localhost:8080/saveanswer', {
+            method: "POST",
+            headers: {"content-type":"application/json"},
+            body: JSON.stringify(answersList)
+        })
+        .then(response => {
+            if(!response.ok)
+                throw new Error("Error when saving answers: " + response.statusText)
+
+            return response.json();
+        })
+        .catch(err => console.error(err))
+    }
+
+
     return (
 
         <>
@@ -58,7 +75,8 @@ function Querylist() {
                     )}
                 </tbody>
             </table>
-            <button>save</button>
+            <button onClick={() => saveAnswers()}>save</button>
+            
 
         </>
 
