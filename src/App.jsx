@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
+
+import { Outlet } from 'react-router-dom'
 import './App.css'
-import Querylist from './components/Querylist'
+import Queries from './components/Queries'
 
 function App() {
 
   return(
     <>
-      <Querylist />
+      <Outlet />
     </>
   )
 }
