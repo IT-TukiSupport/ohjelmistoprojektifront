@@ -12,7 +12,6 @@ const router = createBrowserRouter([  // Import components that are used in rout
     element: <App />,
     children: [                       // children are nested routes with a route
       {
-        path: "Queries",
         element: <Queries />,
         index: true                   // index route does not need any path
       },
