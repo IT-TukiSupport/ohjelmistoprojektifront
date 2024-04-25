@@ -34,7 +34,7 @@ function Query() {
     }, []);
 
     const saveAnswers = () => {
-        fetch('http://localhost:8080/saveanswer', {
+        fetch('http://localhost:8080/answers', {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(answersList)
