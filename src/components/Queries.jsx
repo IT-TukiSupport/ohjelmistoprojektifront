@@ -33,7 +33,7 @@ function Queries() {
                         queries.map((query) =>
                         <tr key={query.queryid}>
                             <td>{query.name}</td>
-                            <td><Link to='/Query' state={{from: query}}>Vastaa</Link></td>
+                            <td><Link to='/Query' state={{from: query}}><button>Open Query</button></Link></td>
                         </tr>
                         )
                     }

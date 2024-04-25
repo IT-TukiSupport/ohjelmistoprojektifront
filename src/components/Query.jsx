@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 function Query() {
 
@@ -51,7 +51,9 @@ function Query() {
 
     return (
 
-        <>
+        <> 
+         <Link to='/'><button>Back to queries</button></Link>
+
             {query.questions && query.questions.length > 0 ? (
                 <div>
                     <h1>{query.name}</h1>
@@ -72,7 +74,8 @@ function Query() {
             ) : (
                 <p>Ei kysymyksiä saatavilla.</p>
             )}
-            <button onClick={() => saveAnswers()}>save</button>
+            <button onClick={() => saveAnswers()}>Save answers</button>
+
 
 
         </>
