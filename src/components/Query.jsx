@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { redirect, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Query() {
 
@@ -58,12 +58,12 @@ function Query() {
 
                     <p>{query.desc}</p>
 
-                    <table>
+                    <table className="center">
                         <tbody>
                             {query.questions.map((question) =>
                                 <tr key={question.questionid}>
-                                    <td>{question.questionText}</td>
-                                    <td><textarea type="text" rows='10' cols='50' onBlur={handleBlur} onChange={e => setAnswer({ ...answer, question: { questionid: question.questionid }, answerText: e.target.value })} /></td>
+                                    <td className="questionForm">{question.questionText}</td>
+                                    <td className="questionForm"><textarea type="text" rows='10' cols='50' onBlur={handleBlur} onChange={e => setAnswer({ ...answer, question: { questionid: question.questionid }, answerText: e.target.value })} /></td>
                                 </tr>
                             )}
                         </tbody>
