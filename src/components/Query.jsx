@@ -70,14 +70,14 @@ function Query() {
                             )}
                         </tbody>
                     </table>
+
+                    <button onClick={() => saveAnswers()}>Save answers</button>
+
                 </div>
+                                
             ) : (
                 <p>Ei kysymyksiä saatavilla.</p>
             )}
-            <button onClick={() => saveAnswers()}>Save answers</button>
-
-
-
         </>
 
     )
