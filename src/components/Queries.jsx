@@ -34,6 +34,8 @@ function Queries() {
                         <tr key={query.queryid}>
                             <td>{query.name}</td>
                             <td><Link to='/Query' state={{from: query}}><button>Open Query</button></Link></td>
+                            <td><Link to='/Answers' state={{from: query}}><button>Check Answers</button></Link></td>
+
                         </tr>
                         )
                     }

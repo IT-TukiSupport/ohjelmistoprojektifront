@@ -5,6 +5,7 @@ import './index.css'
 import Queries from './components/Queries.jsx';
 import Query from './components/Query.jsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Answers from './components/Answers.jsx';
 
 const router = createBrowserRouter([  // Import components that are used in routes
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([  // Import components that are used in rout
         path: "Query",                // path can be defined relative to the parent path
         element: <Query />,
       },
+      {
+        path: "Answers",
+        element: <Answers />,
+      }
     ]
   }
 ]);

@@ -76,3 +76,13 @@ button:focus-visible {
   margin-left: auto;
   margin-right: auto;
 }
+
+.myUL {
+  text-align: left;
+}
+
+.myTD {
+  font-weight: bold;
+  text-align: left;
+
+}

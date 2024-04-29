@@ -34,6 +34,7 @@ function Query() {
     }, []);
 
     const saveAnswers = () => {
+        
         fetch('http://localhost:8080/answers', {
             method: "POST",
             headers: { "content-type": "application/json" },
@@ -44,7 +45,7 @@ function Query() {
                     throw new Error("Error when saving answers: " + response.statusText)
 
                 return response.json();
-            })
+            })       
             .catch(err => console.error(err))
     }
 
