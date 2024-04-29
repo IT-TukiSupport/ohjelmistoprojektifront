@@ -1,5 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import React from "react";
 
 function Answers() {
 
@@ -20,8 +21,8 @@ function Answers() {
             <table className="center">
                 <tbody>
                     {query.questions.map((question) => (
-                        <>
-                            <tr key={question.questionid}>
+                        <React.Fragment key={question.questionid}>
+                            <tr>
                                 <td className="myTD">{question.questionText}</td>
                             </tr>
                             <tr>
@@ -34,7 +35,7 @@ function Answers() {
                                     </ul>
                                 </td>
                             </tr>
-                        </>
+                        </React.Fragment>
                     ))}
                 </tbody>
             </table>

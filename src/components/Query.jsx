@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 function Query() {
 
     const location = useLocation();
     const { from } = location.state;
+
+    const navigate = useNavigate();
 
     const [query, setQuery] = useState([]); // tarkista myöhemmin
     const [answer, setAnswer] = useState([]);
@@ -33,6 +35,17 @@ function Query() {
         setQuery(from)
     }, []);
 
+    const answersListNotNull = () => {
+        if (answersList != 0) {
+            saveAnswers();
+            window.alert("Kiitos vastauksista!")
+            navigate('/')
+        } else {
+            window.alert("Täytä ainakin yksi vastaus!")
+        }
+
+    }
+
     const saveAnswers = () => {
         
         fetch('http://localhost:8080/answers', {
@@ -45,7 +58,7 @@ function Query() {
                     throw new Error("Error when saving answers: " + response.statusText)
 
                 return response.json();
-            })       
+            })
             .catch(err => console.error(err))
     }
 
@@ -72,7 +85,7 @@ function Query() {
                         </tbody>
                     </table>
 
-                    <button onClick={() => saveAnswers()}>Save answers</button>
+                    <button onClick={() => answersListNotNull()}>Save answers</button>
 
                 </div>
                                 
