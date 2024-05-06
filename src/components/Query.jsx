@@ -88,12 +88,12 @@ function Query() {
                         <tbody>
                             {query.questions.map((question) =>
                                 <tr key={question.questionid}>
-                                    <td className="questionForm">{question.questionText}</td>
+                                    <td className="questionHeader">{question.questionText}</td>
 
                                     {question.questionType == "TEXT"
                                     ? <td className="questionForm"><textarea type="text" rows='10' cols='50' onBlur={handleBlur} onChange={e => setAnswer({ ...answer, question: { questionid: question.questionid }, answerText: e.target.value })} /></td>
-                                    : <td>{question.choices.map((choice =>
-                                        <div className="myDIV" key={choice.choiceId}>
+                                    : <td className="questionForm">{question.choices.map((choice =>
+                                        <td className="questionForm" key={choice.choiceId}>
                                             <input type="radio"
                                             value={choice.choiceText} 
                                             onChange={(e) => handleRadioChange(e, question.questionid)}  
@@ -103,7 +103,7 @@ function Query() {
                                         {choice.choiceText}
                                             
 
-                                        </div>
+                                        </td>
 
                                     ))} </td>
                                     }

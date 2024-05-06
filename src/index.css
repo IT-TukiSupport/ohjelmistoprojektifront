@@ -72,6 +72,12 @@ button:focus-visible {
   clear: both;
 }
 
+.questionHeader {
+  display: block;
+  clear: both;
+  font-weight: bold;
+}
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -85,8 +91,4 @@ button:focus-visible {
   font-weight: bold;
   text-align: left;
 
-}
-
-.myDIV {
-  
 }
