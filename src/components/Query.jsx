@@ -11,6 +11,7 @@ function Query() {
     const [query, setQuery] = useState([]); // tarkista myöhemmin
     const [answer, setAnswer] = useState([]);
     const [answersList, setAnswersList] = useState([]);
+    const [selectedChoice, setSelectedChoice] = useState(null);
 
 
     const handleBlur = () => {
@@ -62,6 +63,15 @@ function Query() {
             .catch(err => console.error(err))
     }
 
+    const handleRadioChange = (e, questionid) => {
+        setSelectedChoice(e.target.value);
+        const newAnswer = { question: { questionid: questionid }, answerText: e.target.value };
+        setAnswer(newAnswer);
+        setAnswersList(prevAnswersList => [...prevAnswersList, newAnswer]);
+
+       
+    };
+
 
     return (
 
@@ -79,8 +89,26 @@ function Query() {
                             {query.questions.map((question) =>
                                 <tr key={question.questionid}>
                                     <td className="questionForm">{question.questionText}</td>
-                                    <td className="questionForm"><textarea type="text" rows='10' cols='50' onBlur={handleBlur} onChange={e => setAnswer({ ...answer, question: { questionid: question.questionid }, answerText: e.target.value })} /></td>
-                                </tr>
+
+                                    {question.questionType == "TEXT"
+                                    ? <td className="questionForm"><textarea type="text" rows='10' cols='50' onBlur={handleBlur} onChange={e => setAnswer({ ...answer, question: { questionid: question.questionid }, answerText: e.target.value })} /></td>
+                                    : <td>{question.choices.map((choice =>
+                                        <div className="myDIV" key={choice.choiceId}>
+                                            <input type="radio"
+                                            value={choice.choiceText} 
+                                            onChange={(e) => handleRadioChange(e, question.questionid)}  
+                                            checked={selectedChoice === choice.choiceText}
+                                           
+                                            />
+                                        {choice.choiceText}
+                                            
+
+                                        </div>
+
+                                    ))} </td>
+                                    }
+                                    
+                                </tr> 
                             )}
                         </tbody>
                     </table>
