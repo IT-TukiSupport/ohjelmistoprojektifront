@@ -1,6 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
+import _ from "lodash";
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
 function Answers() {
 
@@ -31,12 +33,30 @@ function Answers() {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <ul className="myUL">
+                                        {question.questionType == "TEXT"
+                                        ? <ul className="myUL">
                                                 {question.answers.map(answer => (
                                                     <li key={answer.answerid}>
                                                         {answer.answerText}</li>
                                                 ))}
                                             </ul>
+                                        :  <ResponsiveContainer width={300} height={300}>
+                                        <PieChart>
+                                            <Pie
+                                                data={question.answers}
+                                                dataKey="answerid"
+                                                nameKey="answerText"
+                                                cx="50%"
+                                                cy="50%"
+                                                outerRadius={80}
+                                                fill="#8884d8"
+                                                label
+                                            />
+                                            <Tooltip />
+                                            <Legend />
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                            }
                                         </td>
                                     </tr>
                                 </React.Fragment>
