@@ -2,7 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
 import _ from "lodash";
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 
 function Answers() {
 
@@ -13,6 +13,18 @@ function Answers() {
     useEffect(() => {
         setQuery(from);
     }, []);
+
+    const generateChartDataForQuestion = (question) => {
+        const answers = question.answers.map(answer => answer.answerText);
+
+        const groupByAnswer = _.groupBy(answers);
+        const choiceSum = _.mapValues(groupByAnswer, group => group.length);
+
+        return Object.keys(choiceSum).map(answerText => ({
+            name: answerText,
+            value: choiceSum[answerText]
+        }));
+    }
 
     return (
         <>
@@ -33,29 +45,27 @@ function Answers() {
                                     </tr>
                                     <tr>
                                         <td>
-                                        {question.questionType == "TEXT"
-                                        ? <ul className="myUL">
-                                                {question.answers.map(answer => (
-                                                    <li key={answer.answerid}>
-                                                        {answer.answerText}</li>
-                                                ))}
-                                            </ul>
-                                        :  <ResponsiveContainer width={300} height={300}>
-                                        <PieChart>
-                                            <Pie
-                                                data={question.answers}
-                                                dataKey="answerid"
-                                                nameKey="answerText"
-                                                cx="50%"
-                                                cy="50%"
-                                                outerRadius={80}
-                                                fill="#8884d8"
-                                                label
-                                            />
-                                            <Tooltip />
-                                            <Legend />
-                                        </PieChart>
-                                    </ResponsiveContainer>
+                                            {question.questionType == "TEXT"
+                                                ? <ul className="myUL">
+                                                    {question.answers.map(answer => (
+                                                        <li key={answer.answerid}>
+                                                            {answer.answerText}</li>
+                                                    ))}
+                                                </ul>
+                                                : <PieChart width={300} height={300}>
+                                                        <Pie
+                                                            data={generateChartDataForQuestion(question)}
+                                                            dataKey="value"
+                                                            nameKey="name"
+                                                            cx="50%"
+                                                            cy="50%"
+                                                            outerRadius={80}
+                                                            fill="#8884d8"
+                                                            label
+                                                        />
+                                                        <Tooltip />
+                                                        <Legend />
+                                                    </PieChart>
                                             }
                                         </td>
                                     </tr>
