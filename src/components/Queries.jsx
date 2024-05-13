@@ -9,7 +9,7 @@ function Queries() {
     }, []);
 
     const fetchQueries = () => {
-        fetch('http://localhost:8080/querys')
+        fetch('http://ohjelmistoprojekti1-ittukiquizproject.rahtiapp.fi/querys')
             .then(response => {
                 if (!response.ok)
                     throw new Error("Error in fetch: " + response.statusText);
