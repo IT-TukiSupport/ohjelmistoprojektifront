@@ -11,7 +11,7 @@ function Query() {
     const [query, setQuery] = useState([]); // tarkista myöhemmin
     const [answer, setAnswer] = useState([]);
     const [answersList, setAnswersList] = useState([]);
-    const [selectedChoice, setSelectedChoice] = useState(null);
+    const [selectedChoice, setSelectedChoice] = useState({});
 
 
     const handleBlur = () => {
@@ -48,7 +48,7 @@ function Query() {
     }
 
     const saveAnswers = () => {
-        
+
         fetch('http://localhost:8080/answers', {
             method: "POST",
             headers: { "content-type": "application/json" },
@@ -64,19 +64,22 @@ function Query() {
     }
 
     const handleRadioChange = (e, questionid) => {
-        setSelectedChoice(e.target.value);
-        const newAnswer = { question: { questionid: questionid }, answerText: e.target.value };
-        setAnswer(newAnswer);
-        setAnswersList(prevAnswersList => [...prevAnswersList, newAnswer]);
 
-       
+        const { value } = e.target;
+
+        setSelectedChoice({
+            ...selectedChoice,
+            [questionid]: value,});
+
+            const newAnswer = { question: { questionid: questionid }, answerText: value };
+            setAnswersList((prevAnswersList) => [...prevAnswersList.filter((item) => item.question.questionid !== questionid), newAnswer]);
     };
 
 
     return (
 
-        <> 
-         <Link to='/'><button>Back to queries</button></Link>
+        <>
+            <Link to='/'><button>Back to queries</button></Link>
 
             {query.questions && query.questions.length > 0 ? (
                 <div>
@@ -91,24 +94,24 @@ function Query() {
                                     <td className="questionHeader">{question.questionText}</td>
 
                                     {question.questionType == "TEXT"
-                                    ? <td className="questionForm"><textarea type="text" rows='10' cols='50' onBlur={handleBlur} onChange={e => setAnswer({ ...answer, question: { questionid: question.questionid }, answerText: e.target.value })} /></td>
-                                    : <td className="questionForm">{question.choices.map((choice =>
-                                        <td className="questionForm" key={choice.choiceId}>
-                                            <input type="radio"
-                                            value={choice.choiceText} 
-                                            onChange={(e) => handleRadioChange(e, question.questionid)}  
-                                            checked={selectedChoice === choice.choiceText}
-                                           
-                                            />
-                                        {choice.choiceText}
-                                            
+                                        ? <td className="questionForm"><textarea type="text" rows='10' cols='50' onBlur={handleBlur} onChange={e => setAnswer({ ...answer, question: { questionid: question.questionid }, answerText: e.target.value })} /></td>
+                                        : <td className="questionForm">{question.choices.map((choice =>
+                                            <td className="questionForm" key={choice.choiceId}>
+                                                <input type="radio"
+                                                    value={choice.choiceText}
+                                                    onChange={(e) => handleRadioChange(e, question.questionid)}
+                                                    checked={selectedChoice[question.questionid] === choice.choiceText}
 
-                                        </td>
+                                                />
+                                                {choice.choiceText}
 
-                                    ))} </td>
+
+                                            </td>
+
+                                        ))} </td>
                                     }
-                                    
-                                </tr> 
+
+                                </tr>
                             )}
                         </tbody>
                     </table>
@@ -116,7 +119,7 @@ function Query() {
                     <button onClick={() => answersListNotNull()}>Save answers</button>
 
                 </div>
-                                
+
             ) : (
                 <p>Ei kysymyksiä saatavilla.</p>
             )}
