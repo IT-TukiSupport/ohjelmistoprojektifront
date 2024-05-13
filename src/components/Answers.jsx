@@ -2,7 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
 import _ from "lodash";
-import { PieChart, Pie, Legend, Tooltip } from 'recharts';
+import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 
 function Answers() {
 
@@ -25,6 +25,9 @@ function Answers() {
             value: choiceSum[answerText]
         }));
     }
+
+    const colors = ['purple', 'blue', 'violet', 'green', 'blue', 'yellow']; // värejä voi muutella sitten
+
 
     return (
         <>
@@ -60,9 +63,13 @@ function Answers() {
                                                             cx="50%"
                                                             cy="50%"
                                                             outerRadius={80}
-                                                            fill="#8884d8"
                                                             label
-                                                        />
+                                                            >
+                                                         {generateChartDataForQuestion(question).map((entry, index) => (
+                                                        <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                                                            ))}
+
+                                                    </Pie>
                                                         <Tooltip />
                                                         <Legend />
                                                     </PieChart>
