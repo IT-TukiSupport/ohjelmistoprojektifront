@@ -49,7 +49,7 @@ function Query() {
 
     const saveAnswers = () => {
 
-        fetch('http://ohjelmistoprojekti1-ittukiquizproject.rahtiapp.fi/answers', {
+        fetch('https://ohjelmistoprojekti1-ittukiquizproject.rahtiapp.fi/answers', {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(answersList)
