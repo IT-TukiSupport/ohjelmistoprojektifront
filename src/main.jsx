@@ -4,32 +4,19 @@ import App from './App.jsx'
 import './index.css'
 import Queries from './components/Queries.jsx';
 import Query from './components/Query.jsx';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Answers from './components/Answers.jsx';
-
-const router = createBrowserRouter([  // Import components that are used in routes
-  {
-    path: "/",
-    element: <App />,
-    children: [                       // children are nested routes with a route
-      {
-        element: <Queries />,
-        index: true                   // index route does not need any path
-      },
-      {
-        path: "Query",                // path can be defined relative to the parent path
-        element: <Query />,
-      },
-      {
-        path: "Answers",
-        element: <Answers />,
-      }
-    ]
-  }
-]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Router>
+      <Routes> 
+        <Route path="/" element={<App />}>
+          <Route index element={<Queries />} />
+          <Route path="Query" element={<Query />} />
+          <Route path="Answers" element={<Answers />} />
+        </Route>
+      </Routes>
+    </Router>
   </React.StrictMode>,
-)
+);
