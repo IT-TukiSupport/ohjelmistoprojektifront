@@ -22,7 +22,7 @@ function Queries() {
 
     return (
         <>
-            <h1>Queries</h1>
+            <h1>Kattellaan</h1>
 
             <table>
                 <tbody>
