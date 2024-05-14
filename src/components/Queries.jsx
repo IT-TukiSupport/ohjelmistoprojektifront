@@ -9,7 +9,7 @@ function Queries() {
     }, []);
 
     const fetchQueries = () => {
-        fetch('https://test-ittukiquizproject.rahtiapp.fi/querys')
+        fetch('https://ohjelmistoprojekti1-ittukiquizproject.rahtiapp.fi/querys')
             .then(response => {
                 if (!response.ok)
                     throw new Error("Error in fetch: " + response.statusText);
@@ -22,7 +22,7 @@ function Queries() {
 
     return (
         <>
-            <h1>Kattellaan</h1>
+            <h1>Queries</h1>
 
             <table>
                 <tbody>
